@@ -1,0 +1,9 @@
+fetch("/ai-chat", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ message: userMessage })
+})
+.then(res => res.json())
+.then(data => {
+    chatBox.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+});

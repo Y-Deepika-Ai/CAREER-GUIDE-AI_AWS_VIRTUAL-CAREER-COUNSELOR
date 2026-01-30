@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h2>Welcome Admin 👋</h2>
+
+    <div class="dashboard-cards">
+        <div class="card">👥 Total Users<br><b>{{ users_count }}</b></div>
+        <div class="card">📁 Projects<br><b>{{ projects_count }}</b></div>
+        <div class="card">🤖 AI Chats<br><b>{{ chats_count }}</b></div>
+    </div>
+
+    <br>
+    <a href="/logout" class="auth-btn">Logout</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Career Pathways</h2>
+
+    {% for p in projects %}
+    <div class="card">
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.description }}</p>
+        <strong>Skills Required:</strong> {{ p.skills }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

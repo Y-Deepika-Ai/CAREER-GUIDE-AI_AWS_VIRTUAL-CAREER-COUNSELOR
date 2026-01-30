@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="project-card">
+
+    <h1 style="text-align:center;">CareerGuideAI 🤖</h1>
+    <p style="text-align:center;">
+        AI-Powered Virtual Career Decision Support System helping students
+        choose the right career path with confidence and clarity.
+    </p>
+
+    <hr>
+
+    <!-- 🧠 CHATBOT -->
+    <div id="chat-container" style="margin:20px auto; max-width:600px;">
+        <div id="chat-box"
+             style="border:1px solid #ccc; height:300px; padding:10px; overflow-y:auto; background:#f9f9f9;">
+        </div>
+
+        <div style="display:flex; margin-top:10px;">
+            <input type="text"
+                   id="user-input"
+                   placeholder="Ask about your career..."
+                   style="flex:1; padding:8px;" />
+            <button onclick="sendMessage()" style="padding:8px 15px;">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- 📌 TECH STACK -->
+    <h2>Tech Stack</h2>
+
+    <p><strong>Programming Language:</strong> Python</p>
+    <p><strong>Backend:</strong> Flask</p>
+    <p><strong>Frontend:</strong> HTML, CSS, JavaScript</p>
+    <p><strong>Database (Current):</strong> Python Dictionaries (In-Memory)</p>
+
+    <p><strong>AWS Services (Next Phase):</strong></p>
+    <ul>
+        <li>IAM – Secure access management</li>
+        <li>DynamoDB – NoSQL database</li>
+        <li>SNS – Notifications</li>
+        <li>EC2 – Application deployment</li>
+    </ul>
+
+    <hr>
+
+    <h3>Current Focus</h3>
+    <p>
+        Building core features aligned with the problem statement,
+        validating application flow using local data storage before
+        AWS cloud integration.
+    </p>
+
+</div>
+
+<!-- ⚙️ CHATBOT SCRIPT -->
+<script>
+function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatBox = document.getElementById("chat-box");
+
+    chatBox.innerHTML += `<p><b>You:</b> ${message}</p>`;
+
+    fetch("/ai-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBox.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(() => {
+        chatBox.innerHTML += `<p><b>AI:</b> Service unavailable</p>`;
+    });
+
+    input.value = "";
+}
+</script>
+
+{% endblock %}

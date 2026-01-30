@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <h1 class="hero-title">
+        Career<span>GuideAI</span>
+    </h1>
+
+    <p class="hero-subtitle">
+        AI-Powered Virtual Career Decision Support System helping students choose
+        the right career path with confidence and clarity.
+    </p>
+</section>
+
+<section class="features container">
+
+    <a href="{{ url_for('career_assessment') }}" class="card-link">
+        <div class="card">
+            <div class="icon">🎯</div>
+            <h3>Career Assessment</h3>
+            <p>Structured evaluation of interests, skills, and academic strengths.</p>
+        </div>
+    </a>
+
+    <a href="{{ url_for('ai_suggestions') }}" class="card-link">
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>AI Career Suggestions</h3>
+            <p>Smart recommendations using logical decision-making models.</p>
+        </div>
+    </a>
+
+    <a href="{{ url_for('skill_roadmap') }}" class="card-link">
+        <div class="card">
+            <div class="icon">📘</div>
+            <h3>Skill Roadmap</h3>
+            <p>Clear learning paths, certifications, and skill guidance.</p>
+        </div>
+    </a>
+
+    <a href="{{ url_for('cloud_platform') }}" class="card-link">
+        <div class="card">
+            <div class="icon">☁️</div>
+            <h3>Cloud-Based Platform</h3>
+            <p>Built with Flask and deployed on AWS for scalability.</p>
+        </div>
+    </a>
+
+
+<!-- Floating AI Button -->
+
+<div id="chatbot-container">
+
+    <!-- Floating Button -->
+    <div class="ai-float-btn" onclick="toggleChat()">🤖</div>
+
+    <div id="chatbot-container">
+    <div class="ai-float-btn" onclick="toggleChat()">
+        <div class="bot-icon-wrapper">
+            <span class="bot-icon">🤖</span>
+            <div class="pulse-ring"></div>
+        </div>
+    </div>
+
+    <div id="ai-chatbox" class="ai-chatbox">
+        <div class="ai-header">
+            <div class="header-status">
+                <span class="close-btn" onclick=" toggleChat()">✕</span>
+                <span class="status-dot"></span>
+                <strong>CareerGuideAI</strong>
+            </div>
+            
+        </div>
+
+        <div id="ai-messages" class="ai-messages">
+            <div class="bot-msg">👋 Hi! I'm your AI career guide. Ask me anything!</div>
+        </div>
+
+        <div id="typing-indicator" class="typing" style="display: none;">
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="ai-input">
+            <input type="text" id="userMessage" placeholder="Type a message..." onkeypress="handleKeyPress(event)" />
+            <button onclick="sendMessage()" id="sendBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" /></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleChat() {
+    const chat = document.getElementById("ai-chatbox");
+    chat.classList.toggle("active");
+}
+
+function handleKeyPress(e) {
+    if (e.key === "Enter") sendMessage();
+}
+
+function sendMessage() {
+    const input = document.getElementById("userMessage");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesDiv = document.getElementById("ai-messages");
+    const typingIndicator = document.getElementById("typing-indicator");
+
+    // Add User Message
+    messagesDiv.innerHTML += `<div class="user-msg">${message}</div>`;
+    input.value = "";
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    // Show Typing Animation
+    typingIndicator.style.display = "block";
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    fetch("/ai-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        typingIndicator.style.display = "none";
+        messagesDiv.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    })
+    .catch(() => {
+        typingIndicator.style.display = "none";
+    });
+}
+</script>    
+
+
+<!-- AI Chat Box -->
+<div id="ai-chatbox" class="ai-chatbox">
+    <div class="ai-header">
+        CareerGuideAI 🤖
+        <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <div id="ai-messages" class="ai-messages"></div>
+
+    <div class="ai-input">
+        <input type="text" id="userMessage" placeholder="Ask about your career..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    
+</div>
+<script>
+function toggleChat() {
+    const chat = document.getElementById("ai-chatbox");
+    chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+}
+
+function sendMessage() {
+    const input = document.getElementById("userMessage");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesDiv = document.getElementById("ai-messages");
+
+    messagesDiv.innerHTML += `<p><b>You:</b> ${message}</p>`;
+    input.value = "";
+
+    fetch("/ai-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        messagesDiv.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    });
+}
+</script>
+
+
+
+</section>
+
+{% endblock %}

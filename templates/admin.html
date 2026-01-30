@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | CareerGuideAI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f4f8fb;
+            color: #333;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #0d47a1, #1976d2);
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            background: #ff5252;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background: #ff1744;
+        }
+
+        .container {
+            padding: 40px;
+        }
+
+        .welcome h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            color: #555;
+        }
+
+        .cards {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            color: #1976d2;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .stat {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 10px 0;
+            color: #0d47a1;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #fff;
+            background: #1976d2;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .card a:hover {
+            background: #0d47a1;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <h2>CareerGuideAI • Admin</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+    <div class="welcome">
+        <h1>Welcome, Admin 👋</h1>
+        <p>Monitor users, assessments, and platform performance.</p>
+    </div>
+
+    <div class="cards">
+
+        <!-- USERS -->
+        <div class="card">
+            <h3>👥 Registered Users</h3>
+            <div class="stat">{{ total_users }}</div>
+            <p>Total users signed up on the platform.</p>
+            <a href="#">View Users</a>
+        </div>
+
+        <!-- ASSESSMENTS -->
+        <div class="card">
+            <h3>🧠 Assessments Taken</h3>
+            <div class="stat">{{ total_assessments }}</div>
+            <p>Number of completed career assessments.</p>
+            <a href="#">View Details</a>
+        </div>
+
+        <!-- POPULAR CAREER -->
+        <div class="card">
+            <h3>🚀 Most Chosen Career</h3>
+            <div class="stat">{{ popular_career }}</div>
+            <p>Top recommended career by Artificial Intelligence.</p>
+            <a href="#">View Insights</a>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="card">
+            <h3>⚙ Platform Settings</h3>
+            <p>Manage admin credentials and system configuration.</p>
+            <a href="#">Manage Settings</a>
+        </div>
+
+    </div>
+    
+</div>
+
+<footer>
+    © 2026 CareerGuideAI. All rights reserved.
+</footer>
+
+</body>
+</html>

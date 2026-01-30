@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Signup</h2>
+<form method="post">
+    <label>Name</label>
+    <input name="name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Password</label>
+    <input type="password" name="password" required>
+
+    <button>Create Admin</button>
+</form>
+{% endblock %}

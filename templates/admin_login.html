@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login | CareerGuideAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+
+<div class="auth-container">
+    <h2 class="auth-title">Admin Login 🔐</h2>
+    <p class="auth-subtitle">
+        Login to manage CareerGuideAI platform
+    </p>
+
+    {% if error %}
+        <p class="error-text">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Admin Username" required>
+        <input type="password" name="password" placeholder="Admin Password" required>
+
+        <button type="submit" class="auth-btn">Login as Admin</button>
+    </form>
+</div>
+
+</body>
+</html>
