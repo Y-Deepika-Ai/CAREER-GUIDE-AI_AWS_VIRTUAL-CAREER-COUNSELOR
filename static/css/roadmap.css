@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #e0f2ff, #f5faff);
+}
+
+.page-bg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roadmap-card {
+    background: white;
+    width: 900px;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+h2 {
+    color: #1e3a8a;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #475569;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+.generate-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.generate-btn:hover {
+    background: #1e40af;
+}
+
+.output-box {
+    margin-top: 30px;
+    background: #f8fbff;
+    padding: 25px;
+    border-radius: 14px;
+    animation: fadeUp 0.6s ease;
+}
+
+.intro {
+    color: #334155;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.info {
+    background: #e0ecff;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+.roadmap-steps ul {
+    padding-left: 18px;
+}
+
+.mentor-tip {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

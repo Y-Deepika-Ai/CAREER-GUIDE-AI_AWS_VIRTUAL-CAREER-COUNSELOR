@@ -85,6 +85,44 @@ function sendMessage() {
 
     input.value = "";
 }
+
 </script>
 
 {% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CareerCounsel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/roadmap.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>CareerCounsel</h1>
+
+    <!-- DO NOT ADD action -->
+    <form method="POST">
+
+        <label>Career Goal</label>
+        <select name="career_goal">
+            <option>Web Developer</option>
+            <option>AI Engineer</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if roadmap %}
+        <h2>Generated Roadmap</h2>
+        <ul>
+            {% for step in roadmap %}
+                <li>{{ step }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+</body>
+</html>
