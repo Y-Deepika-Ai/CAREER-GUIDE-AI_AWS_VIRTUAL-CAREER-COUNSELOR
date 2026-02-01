@@ -78,72 +78,61 @@ def result():
 @app.route("/ai-suggestions")
 def ai_suggestions():
     return render_template("ai_suggestions.html")
-def generate_roadmap(level, focus, hours):
-    roadmap = []
-
-    if focus == "AI / Machine Learning":
-        roadmap = [
-            "Python fundamentals",
-            "NumPy & Pandas",
-            "Machine Learning basics",
-            "Scikit-learn projects",
-            "Deep Learning intro",
-            "Mini AI Project"
+def generate_roadmap(goal, level, hours):
+    base = {
+        "Frontend Developer": [
+            "HTML & Semantic Markup",
+            "CSS & Flexbox/Grid",
+            "JavaScript Fundamentals",
+            "Git & GitHub",
+            "React Basics",
+            "Projects & Portfolio"
+        ],
+        "Backend Developer": [
+            "Python Basics",
+            "Flask Framework",
+            "REST APIs",
+            "Databases (SQL)",
+            "Authentication",
+            "Deploy Backend"
+        ],
+        "Cloud Engineer": [
+            "Linux Fundamentals",
+            "Networking Basics",
+            "AWS Core Services",
+            "EC2 & S3",
+            "IAM & Security",
+            "Deploy Cloud Project"
         ]
+    }
 
-    elif focus == "Web Development":
-        roadmap = [
-            "HTML, CSS basics",
-            "JavaScript fundamentals",
-            "Frontend framework (React)",
-            "Backend (Flask / Node)",
-            "Database (SQL)",
-            "Full-stack project"
-        ]
+    roadmap = base.get(goal, [])
 
-    elif focus == "Cloud / DevOps":
-        roadmap = [
-            "Linux basics",
-            "AWS fundamentals",
-            "Docker",
-            "CI/CD pipelines",
-            "Kubernetes basics",
-            "Cloud project"
-        ]
-
-    elif focus == "Data Science":
-        roadmap = [
-            "Python for Data",
-            "Statistics",
-            "Data Visualization",
-            "Machine Learning",
-            "Real-world datasets",
-            "Capstone project"
-        ]
+    if level == "Beginner":
+        roadmap = roadmap[:4]
+    elif level == "Intermediate":
+        roadmap = roadmap[:5]
 
     return roadmap
 
+
 @app.route("/skill-roadmap", methods=["GET", "POST"])
 def skill_roadmap():
-
-    level = focus = hours = roadmap = None
-
     if request.method == "POST":
-        level = request.form.get("level")
-        focus = request.form.get("focus")
-        hours = request.form.get("hours")
-        roadmap = generate_roadmap(level, focus, hours)
+        career_goal = request.form.get("career_goal")
+        current_level = request.form.get("current_level")
+        interests = request.form.get("interests")
+        hours_per_week = request.form.get("hours_per_week")
 
-    return render_template(
-        "roadmap_result.html",
-        roadmap=roadmap,
-        level=level,
-        focus=focus,
-        hours=hours
-    )
+        return render_template(
+            "skill_roadmap.html",
+            career_goal=career_goal,
+            current_level=current_level,
+            interests=interests,
+            hours_per_week=hours_per_week
+        )
 
-
-
+    return render_template("skill_roadmap.html")
 
 @app.route("/cloud-platform")
 def cloud_platform():
@@ -205,10 +194,21 @@ def logout():
 # ===============================
 # 6. USER DASHBOARD
 # ===============================
-@app.route("/dashboard")
-@login_required
+@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    return render_template("dashboard.html", username=session["username"])
+    roadmap = None
+
+    if request.method == "POST":
+        career = request.form.get("career")
+        roadmap = [
+            "Fundamentals",
+            "Core Skills",
+            "Projects",
+            "Advanced Topics",
+            "Interview Prep"
+        ]
+
+    return render_template("dashboard.html", roadmap=roadmap)
 
 
 # ===============================
