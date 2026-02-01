@@ -1,21 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="assessment-page">
 
-<section class="features container">
-  <div class="card">
-    <div class="icon">🎯</div>
-    <h3>Career Assessment</h3>
+    <div class="assessment-card">
+        <h1>🎯 Career Assessment</h1>
+        <p class="subtitle">Answer a few questions and let AI guide your future</p>
 
-    <ul class="card-list">
-      <li>Interest-based questionnaire</li>
-      <li>Academic performance analysis</li>
-      <li>Skill and aptitude evaluation</li>
-      <li>Logic-based career matching</li>
-    </ul>
+        <form method="POST">
+    <h2>What type of activities do you enjoy most?</h2>
 
-    <a href="#" class="btn">Start Assessment</a>
-  </div>
-</section>
+    <label><input type="radio" name="interest" value="problem" required> 🧠 Problem Solving</label><br>
+    <label><input type="radio" name="interest" value="creative"> 🎨 Creative Designing</label><br>
+    <label><input type="radio" name="interest" value="people"> 🤝 Helping People</label><br>
+    <label><input type="radio" name="interest" value="data"> 📊 Working with Data</label><br>
+
+    <button class="next-btn">Next →</button>
+</form>
+            </div>
+
+             
+
+</div>
+<div class="container">
+    <div class="card">
+        <div class="progress"><span style="width: 55%"></span></div>
+
+        <h1>Career Assessment</h1>
+        <p>Answer a few questions and let AI guide your future.</p>
+
+        <form method="POST">
+            <label class="option">
+                <input type="radio" name="interest" value="problem" required>
+                🧠 Problem Solving
+            </label>
+
+            <label class="option">
+                <input type="radio" name="interest" value="creative">
+                🎨 Creative Designing
+            </label>
+
+            <label class="option">
+                <input type="radio" name="interest" value="people">
+                🤝 Helping People
+            </label>
+
+            <label class="option">
+                <input type="radio" name="interest" value="data">
+                📊 Working with Data
+            </label>
+
+            <button class="btn">Next →</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

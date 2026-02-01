@@ -378,3 +378,899 @@ box-shadow:
 .about-card h3 { font-size: 20px; margin-bottom: 12px; color: #1e40af; } 
 .about-card p, .about-card li { font-size: 15px; color: #475569; line-height: 1.6; } 
 .about-card ul { padding-left: 18px; }
+
+/* ===== Career Assessment ===== */
+.assessment-page {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #eaf2ff, #f9fbff);
+}
+
+.assessment-card {
+    background: #ffffff;
+    width: 420px;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    animation: slideUp 0.7s ease;
+}
+
+.assessment-card h1 {
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.assessment-card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #111827;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.options label:hover {
+    background: #dbeafe;
+    transform: translateX(6px);
+}
+
+.options input {
+    accent-color: #3b82f6;
+}
+
+.next-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(99,102,241,0.4);
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ---------- GLOBAL ---------- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #eef5ff, #f9fbff);
+    color: #1f2937;
+}
+
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+/* ---------- CARD ---------- */
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- HEADINGS ---------- */
+.card h1 {
+    margin-top: 0;
+    font-size: 30px;
+    color: #1d4ed8;
+}
+
+.card p {
+    color: #475569;
+    margin-bottom: 25px;
+}
+
+/* ---------- OPTIONS ---------- */
+.option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.option:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.option input {
+    accent-color: #2563eb;
+    transform: scale(1.2);
+}
+
+/* ---------- BUTTON ---------- */
+.btn {
+    margin-top: 20px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37,99,235,0.4);
+}
+
+/* ---------- PROGRESS BAR ---------- */
+.progress {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress span {
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+}
+/* ---------- QUIZ ---------- */
+.quiz-card {
+    max-width: 720px;
+    margin: auto;
+    text-align: center;
+}
+
+.quiz-title {
+    font-size: 28px;
+    color: #1d4ed8;
+    margin-bottom: 10px;
+}
+
+.quiz-question {
+    font-size: 16px;
+    color: #475569;
+    margin-bottom: 30px;
+}
+
+.quiz-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Option cards */
+.quiz-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.quiz-option input {
+    display: none;
+}
+
+.quiz-option span {
+    width: 100%;
+}
+
+/* Hover */
+.quiz-option:hover {
+    background: #eff6ff;
+    border-color: #2563eb;
+}
+
+/* Selected */
+.quiz-option input:checked + span {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+/* Submit button */
+.quiz-btn {
+    margin-top: 20px;
+}
+/* Page center wrapper */
+.suggestion-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top left, #e0f2fe, #f8fafc);
+}
+
+/* Main card */
+.suggestion-card {
+    width: 420px;
+    background: white;
+    padding: 40px 35px;
+    border-radius: 26px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.12);
+    text-align: center;
+    animation: slideUp 0.7s ease;
+}
+
+/* Headings */
+.title {
+    color: #1e40af;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #475569;
+    font-size: 15px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Suggestions grid */
+.suggestion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+/* Pills */
+.suggestion-pill {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 16px 10px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+.suggestion-pill:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+}
+
+/* Dashboard button */
+.dashboard-btn {
+    display: inline-block;
+    padding: 14px 34px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dashboard-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .suggestion-card {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .suggestion-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Page center wrapper */
+.suggestion-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top left, #e0f2fe, #f8fafc);
+}
+
+/* Main card */
+.suggestion-card {
+    width: 420px;
+    background: white;
+    padding: 40px 35px;
+    border-radius: 26px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.12);
+    text-align: center;
+    animation: slideUp 0.7s ease;
+}
+
+/* Headings */
+.title {
+    color: #1e40af;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #475569;
+    font-size: 15px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Suggestions grid */
+.suggestion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+/* Pills */
+.suggestion-pill {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 16px 10px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+.suggestion-pill:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+}
+
+/* Dashboard button */
+.dashboard-btn {
+    display: inline-block;
+    padding: 14px 34px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dashboard-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .suggestion-card {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .suggestion-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ================================
+   AI CAREER SUGGESTIONS
+================================ */
+
+.career-suggestions {
+    max-width: 520px;
+    margin: 80px auto;
+    padding: 42px 32px;
+    text-align: center;
+
+    background: linear-gradient(135deg, #ffffff, #f1f7ff);
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 70, 180, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Heading */
+.career-suggestions h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+    letter-spacing: -0.4px;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+/* Roles Grid */
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 38px;
+}
+
+/* Role Chips */
+.role-chip {
+    padding: 16px 12px;
+
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 16px;
+
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+    transition: all 0.3s ease;
+
+    cursor: default;
+}
+
+.role-chip:hover {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 20px 45px rgba(37, 99, 235, 0.45);
+}
+
+/* Dashboard Button */
+.dashboard-btn {
+    display: inline-block;
+    padding: 15px 38px;
+
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #ffffff;
+
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+
+    border-radius: 999px;
+    box-shadow: 0 14px 32px rgba(34, 197, 94, 0.45);
+    transition: all 0.3s ease;
+}
+
+.dashboard-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 50px rgba(34, 197, 94, 0.55);
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+    .career-suggestions {
+        margin: 40px 16px;
+        padding: 32px 22px;
+    }
+
+    .role-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.roadmap-form-container {
+  max-width: 520px;
+  margin: 80px auto;
+  padding: 40px;
+  background: linear-gradient(135deg, #ffffff, #f0f7ff);
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0, 70, 180, 0.18);
+  text-align: center;
+}
+
+.roadmap-form-container h2 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #cbd5f5;
+  font-size: 14px;
+}
+
+.generate-btn {
+  margin-top: 15px;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+}
+.roadmap-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, #eef2ff, #f8fafc);
+}
+
+.roadmap-card {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  padding: 42px 38px;
+  border-radius: 22px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12);
+}
+
+.roadmap-card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.form-group select {
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #c7d2fe;
+  font-size: 14px;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.generate-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(79, 70, 229, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.generate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 45px rgba(79, 70, 229, 0.5);
+}
+.roadmap-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #e0e7ff, #f8fafc);
+}
+
+.roadmap-glass-card {
+  width: 480px;
+  padding: 40px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 35px 80px rgba(79, 70, 229, 0.25);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Header */
+.card-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.card-header p {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 6px;
+}
+
+/* Progress bar */
+.progress-track {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  margin: 26px 0 34px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #4f46e5);
+}
+
+/* Fields */
+.field {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.step {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(79,70,229,0.5);
+}
+
+.field label {
+  font-size: 13px;
+  color: #475569;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.field select {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid #c7d2fe;
+  background: #f8fafc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.field select:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
+}
+
+/* Button */
+.ai-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 999px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  cursor: pointer;
+  box-shadow: 0 20px 45px rgba(34,197,94,0.45);
+  transition: all 0.25s ease;
+}
+
+.ai-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 28px 60px rgba(34,197,94,0.6);
+}
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+/* Background */
+.roadmap-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top left, #e0e7ff, #f8fafc);
+}
+
+/* Card */
+.roadmap-card {
+    width: 480px;
+    padding: 42px;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 45px 90px rgba(79, 70, 229, 0.25);
+}
+
+/* Header */
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* Progress */
+.progress-bar {
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    margin: 28px 0 36px;
+    overflow: hidden;
+}
+
+.progress-bar span {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+}
+
+/* Form steps */
+.form-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.step-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+}
+
+/* Inputs */
+.input-group label {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #c7d2fe;
+    font-size: 14px;
+    outline: none;
+}
+
+select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+}
+
+/* Button */
+.generate-btn {
+    width: 100%;
+    margin-top: 28px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 999px;
+    border: none;
+    color: #fff;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    cursor: pointer;
+    box-shadow: 0 18px 40px rgba(79, 70, 229, 0.45);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.generate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 60px rgba(79, 70, 229, 0.6);
+}

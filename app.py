@@ -45,19 +45,104 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/career-assessment")
+@app.route('/career-assessment', methods=['GET', 'POST'])
 def career_assessment():
-    return render_template("career_assessment.html")
+    if request.method == 'POST':
+        interest = request.form.get('interest')
+        session['interest'] = interest   # store choice
+        return redirect(url_for('quiz'))
+    return render_template('career_assessment.html')
 
+@app.route('/quiz', methods=['GET', 'POST'])
+def quiz():
+    interest = session.get('interest')
+
+    if not interest:
+        return redirect(url_for('career_assessment'))
+
+    if request.method == 'POST':
+        score = request.form.get('answer')
+        session['result'] = score
+        return redirect(url_for('result'))
+
+    return render_template('quiz.html', interest=interest)
+
+
+# STEP 3: Result page
+@app.route('/result')
+def result():
+    interest = session.get('interest')
+    result = session.get('result')
+    return render_template('result.html', interest=interest, result=result)
 
 @app.route("/ai-suggestions")
 def ai_suggestions():
     return render_template("ai_suggestions.html")
+def generate_roadmap(level, focus, hours):
+    roadmap = []
 
+    if focus == "AI / Machine Learning":
+        roadmap = [
+            "Python fundamentals",
+            "NumPy & Pandas",
+            "Machine Learning basics",
+            "Scikit-learn projects",
+            "Deep Learning intro",
+            "Mini AI Project"
+        ]
 
-@app.route("/skill-roadmap")
+    elif focus == "Web Development":
+        roadmap = [
+            "HTML, CSS basics",
+            "JavaScript fundamentals",
+            "Frontend framework (React)",
+            "Backend (Flask / Node)",
+            "Database (SQL)",
+            "Full-stack project"
+        ]
+
+    elif focus == "Cloud / DevOps":
+        roadmap = [
+            "Linux basics",
+            "AWS fundamentals",
+            "Docker",
+            "CI/CD pipelines",
+            "Kubernetes basics",
+            "Cloud project"
+        ]
+
+    elif focus == "Data Science":
+        roadmap = [
+            "Python for Data",
+            "Statistics",
+            "Data Visualization",
+            "Machine Learning",
+            "Real-world datasets",
+            "Capstone project"
+        ]
+
+    return roadmap
+
+@app.route("/skill-roadmap", methods=["GET", "POST"])
 def skill_roadmap():
-    return render_template("skill_roadmap.html")
+
+    level = focus = hours = roadmap = None
+
+    if request.method == "POST":
+        level = request.form.get("level")
+        focus = request.form.get("focus")
+        hours = request.form.get("hours")
+        roadmap = generate_roadmap(level, focus, hours)
+
+    return render_template(
+        "roadmap_result.html",
+        roadmap=roadmap,
+        level=level,
+        focus=focus,
+        hours=hours
+    )
+
+
 
 
 @app.route("/cloud-platform")
@@ -199,6 +284,29 @@ def ai_chat():
 
     return render_template("ai_chat.html")
 
+
+ROADMAPS = {
+    "HR Specialist": {
+        "foundation": [
+            "Communication Skills",
+            "Organizational Behavior",
+            "MS Excel Basics"
+        ],
+        "tools": [
+            "ATS (Zoho Recruit / BambooHR)",
+            "Google Workspace",
+            "Excel Advanced"
+        ],
+        "certifications": [
+            "SHRM Essentials",
+            "LinkedIn Learning HR Basics"
+        ],
+        "advanced": [
+            "Talent Analytics",
+            "Employee Engagement Strategy"
+        ]
+    }
+}
 
 # ===============================
 # 9. RUN APP

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Quiz | CareerGuideAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="card quiz-card">
+
+        <h1 class="quiz-title">Quick Quiz</h1>
+        <p class="quiz-question">
+            How comfortable are you with numbers & analysis?
+        </p>
+
+        <form method="POST" class="quiz-form">
+
+            <label class="quiz-option">
+                <input type="radio" name="answer" value="low" required>
+                <span>Low</span>
+            </label>
+
+            <label class="quiz-option">
+                <input type="radio" name="answer" value="medium">
+                <span>Medium</span>
+            </label>
+
+            <label class="quiz-option">
+                <input type="radio" name="answer" value="high">
+                <span>High</span>
+            </label>
+
+            <button type="submit" class="btn quiz-btn">
+                Submit →
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
+

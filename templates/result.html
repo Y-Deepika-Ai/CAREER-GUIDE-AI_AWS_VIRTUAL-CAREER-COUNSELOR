@@ -1,0 +1,18 @@
+<div class="result-card">
+    <h1>🎯 Your Career Insight</h1>
+
+    <p><strong>Interest:</strong> {{ interest }}</p>
+    <p><strong>Assessment Level:</strong> {{ result }}</p>
+
+    {% if interest == 'creative' %}
+        <p>Recommended paths: UI/UX Designer, Graphic Designer</p>
+    {% elif interest == 'data' %}
+        <p>Recommended paths: Data Analyst, Data Scientist</p>
+    {% elif interest == 'problem' %}
+        <p>Recommended paths: Software Engineer, AI Engineer</p>
+    {% else %}
+        <p>Recommended paths: HR, Counselor, Teacher</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="next-btn">Go to Dashboard</a>
+</div>
