@@ -213,7 +213,7 @@ body::after {
     color: #1e3a8a; 
     margin-bottom: 15px;
     font-weight: 800; /* Extra bold */
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .card p {
@@ -319,6 +319,227 @@ body::after {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
 }
+
+<div class="container">
+    <h2>AI Virtual Interviewer</h2>
+    
+    <div class="card-large">
+        <div class="video-placeholder">
+            <p>📸 Camera access required to start...</p>
+        </div>
+        
+        <div class="feedback-box">
+            <h3>Live Feedback</h3>
+            <p id="feedback-text">Awaiting session start. Your performance metrics will appear here.</p>
+        </div>
+
+        <button class="btn-primary">Start Session</button>
+        <a href="/" class="back-link">← Return to Dashboard</a>
+    </div>
+    /* General Page Styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #e9eff6; /* Light bluish background from your dashboard */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main Content Card */
+.glass-container {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+}
+
+h2 { color: #1e3c72; margin-top: 0; }
+p { color: #fff; }
+
+/* AI Interview Layout Fixes */
+.interview-box {
+    background: #1c1e33; /* Dark background from screenshot */
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7a7e9a;
+    margin-bottom: 25px;
+}
+
+/* ================================
+   DASHBOARD LAYOUT
+================================ */
+
+.dashboard-wrapper {
+    padding: 40px 6%;
+}
+
+/* HERO */
+.dashboard-hero {
+    background: linear-gradient(135deg, #0f3c91, #1e66f5);
+    color: white;
+    padding: 35px 40px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.hero-left h1 {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+.hero-left p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.hero-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.hero-btn.secondary {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.hero-btn.secondary:hover {
+    background: white;
+    color: #0f3c91;
+}
+
+.hero-btn.danger {
+    background: #ff4d4d;
+    color: white;
+}
+
+.hero-btn.danger:hover {
+    background: #d93636;
+}
+
+/* CARDS GRID */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.dash-card {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dash-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+}
+
+.dash-card h3 {
+    margin-bottom: 12px;
+    color: #0f3c91;
+}
+
+.dash-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 18px;
+}
+
+.dash-card a {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #1e66f5;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.dash-card a:hover {
+    background: #0f3c91;
+}
+
+/* Feedback & Input Alignment */
+.action-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+textarea {
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Button Styling (Consistent Blue) */
+.btn-blue {
+    background: #2b4c8c;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-blue:hover {
+    transform: scale(1.05);
+    background: #1e3a70;
+}
+
+.back-link {
+    display: block;
+    margin-top: 15px;
+    color: #2b4c8c;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.result-card {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.score {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2436d1;
+}
+
 
 
 
@@ -433,7 +654,7 @@ body::after {
     flex: 1;
     padding: 10px;
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid #000;
 }
 
 .ai-input button {
@@ -455,7 +676,7 @@ body::after {
 
 .ai-msg {
     align-self: flex-start;
-    background: #f1f5f9;
+    background: #0000;
     color: #1f2937;
     padding: 8px 12px;
     border-radius: 16px 16px 16px 0;
@@ -463,7 +684,7 @@ body::after {
     max-width: 75%;
 }
 
-.auth-body { background: #f4f7fb; 
+.auth-body { background: #000; 
     height: 100vh; display: flex; 
     align-items: center; 
     justify-content: center; } 
@@ -1303,4 +1524,58 @@ body {
 .ai-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 28px 60px rgba(34,197,94,0.6);
+}
+.ai-msg {
+    align-self: flex-start;
+    background: #f1f5f9; /* light visible background */
+    color: #1f2937;
+    padding: 8px 12px;
+    border-radius: 16px 16px 16px 0;
+    margin: 6px 0;
+    max-width: 75%;
+}
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: #ffffff;
+    color: #000;    
+    overflow-x: hidden;
+}
+/* ===== FORCE CHAT TEXT VISIBILITY ===== */
+.ai-chatbox,
+.ai-chatbox * {
+    color: #1f2937;
+}
+
+/* ===== ANALYSIS RESULTS TEXT FIX ===== */
+.analysis-results,
+.analysis-results * {
+    color: #000000 !important;
+}
+
+/* Cards inside analysis section */
+.analysis-results .card,
+.analysis-results .result-card,
+.analysis-results .stat-card {
+    color: #000000 !important;
+}
+
+/* Headings */
+.analysis-results h2,
+.analysis-results h3,
+.analysis-results h4 {
+    color: #000000 !important;
+}
+
+/* Skill chips / pills (Python etc.) */
+.analysis-results .skill,
+.analysis-results .skill-pill,
+.analysis-results .tag {
+    color: #000000 !important;
+    background: #e5e7eb; /* light gray for contrast */
+}
+/* ===== FORCE BLACK FOR RESULT SECTION ===== */
+.result-card,
+.result-card * {
+    color: #000000 !important;
 }

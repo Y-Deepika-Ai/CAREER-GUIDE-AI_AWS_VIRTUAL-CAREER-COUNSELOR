@@ -66,31 +66,48 @@
 <body>
 
 <!-- Navbar -->
-<div class="navbar">
-    <h2>Career<span>GuideAI</span></h2>
-    <div>
-        <a href="/">Home</a>
-        <a href="/logout">Logout</a>
-    </div>
+<div class="dashboard-wrapper">
+
+    <!-- HERO -->
+    <section class="dashboard-hero">
+        <div class="hero-left">
+            <h1>Welcome, {{ session.username or 'User' }} 👋</h1>
+            <p>Your personalized AI-powered career guidance hub</p>
+        </div>
+
+        <div class="hero-actions">
+            <a href="{{ url_for('home') }}" class="hero-btn secondary">🏠 Home</a>
+            <a href="{{ url_for('logout') }}" class="hero-btn danger">Logout</a>
+        </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="dashboard-cards">
+
+        <div class="dash-card">
+            <h3>🎯 Career Goal</h3>
+            <p>Define and refine your career objectives with AI guidance.</p>
+            <a href="#">Explore</a>
+        </div>
+
+        <div class="dash-card">
+            <h3>📊 Skill Analysis</h3>
+            <p>Understand your strengths and gaps with smart insights.</p>
+            <a href="#">Analyze</a>
+        </div>
+
+        <div class="dash-card">
+            <h3>🧠 AI Recommendations</h3>
+            <p>Get tailored career paths and learning suggestions.</p>
+            <a href="#">View</a>
+        </div>
+
+        <div class="dash-card">
+            <h3>📄 Resume Assistant</h3>
+            <p>Improve your resume with AI-powered suggestions.</p>
+            <a href="#">Build</a>
+        </div>
+
+    </section>
+
 </div>
-
-<!-- Dashboard Content -->
-<div class="dashboard">
-
-    <div class="welcome-box">
-        <h1>Welcome to Your Dashboard</h1>
-        <p>Your personalized AI-powered career guidance hub</p>
-    </div>
-
-    
-
-</div>
-
-
-<!-- Footer -->
-<footer>
-    © 2026 CareerGuideAI | Virtual Career Decision Support System
-</footer>
-
-</body>
-</html>

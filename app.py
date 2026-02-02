@@ -2,6 +2,9 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from dotenv import load_dotenv
 from functools import wraps
+from werkzeug.utils import secure_filename
+from PyPDF2 import PdfReader
+
 
 # ===============================
 # 1. INITIALIZATION
@@ -44,6 +47,9 @@ def home():
 def about():
     return render_template("about.html")
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/career-assessment', methods=['GET', 'POST'])
 def career_assessment():
@@ -150,7 +156,75 @@ def show_projects():
 
 
 # ===============================
-# 5. USER AUTH ROUTES
+# 5. AI INTERVIEWS (WORKING)
+# ===============================
+# Sample interview questions
+@app.route("/ai_interviews")
+def ai_interviews():
+    return render_template("ai_interviews.html")
+# ===============================
+# 6. RESUME ANALYSIS (WORKING)
+# ===============================
+from PyPDF2 import PdfReader
+
+def extract_text_from_pdf(file):
+    reader = PdfReader(file)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text() or ""
+    return text
+
+import pdfplumber
+
+def extract_text_from_pdf(file):
+    text = ""
+    with pdfplumber.open(file) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() or ""
+    return text
+
+@app.route("/resume", methods=["GET", "POST"])
+def resume_analysis():
+    result = None
+
+    if request.method == "POST":
+        file = request.files.get("resume")
+
+        if file:
+            text = extract_text_from_pdf(file)
+
+            # SIMPLE ANALYSIS LOGIC (for now)
+            skills_list = ["Python", "AWS", "Flask", "SQL", "Machine Learning"]
+            found_skills = [s for s in skills_list if s.lower() in text.lower()]
+
+            result = {
+                "ats": min(90, 40 + len(found_skills) * 10),
+                "skill_match": min(100, len(found_skills) * 20),
+                "experience": "Fresher / Entry Level",
+                "skills": found_skills
+            }
+
+    return render_template("resume.html", result=result)
+
+
+@app.route("/interview-feedback", methods=["POST"])
+def interview_feedback():
+    data = request.get_json()
+    answer = data.get("answer", "")
+
+    if len(answer) < 20:
+        feedback = "Answer is too short. Try explaining with examples."
+    else:
+        feedback = "Good response! Improve by structuring your answer using STAR method."
+
+    return jsonify({"feedback": feedback})
+
+@app.route("/test")
+def test():
+    return "Route is working"
+
+# ===============================
+# 7. USER AUTH ROUTES
 # ===============================
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -158,13 +232,9 @@ def signup():
         return redirect(url_for("home"))
 
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        if username not in users:
-            users[username] = password
-            session["username"] = username
-            return redirect(url_for("dashboard"))
+        users[request.form["username"]] = request.form["password"]
+        session["username"] = request.form["username"]
+        return redirect(url_for("dashboard"))
 
     return render_template("signup.html")
 
@@ -251,38 +321,30 @@ def admin_logout():
 def chatbot_reply(message):
     message = message.lower()
 
-    if "ai" in message or "machine learning" in message:
-        return "AI is booming 🤖 Learn Python, ML & LLMs."
+    if "ai" in message:
+        return "🤖 AI is a great career! Start with Python and Machine Learning."
 
-    if "cyber" in message:
-        return "Cybersecurity is huge 🔐 Learn networking & ethical hacking."
-
-    if "devops" in message:
-        return "DevOps needs Docker, Kubernetes & CI/CD."
-
-    if "software" in message:
-        return "Software Dev is great! Start with Python or Web Dev."
+    if "cloud" in message:
+        return "☁️ Cloud Engineering is hot! Learn AWS, EC2, S3, IAM."
 
     if "data" in message:
-        return "Data Science needs Python, SQL & statistics."
+        return "📊 Data Science needs Python, SQL, and statistics."
 
-    if "ui" in message or "design" in message:
-        return "UI/UX focuses on design & user experience 🎨."
+    if "software" in message:
+        return "💻 Software Development is evergreen! Focus on DSA + Projects."
 
-    if "career" in message:
-        return "Tell me your interests, I’ll guide you 🙂"
-
-    return "I’m your Career Guide Bot 🤖 Ask me about careers or skills."
-
-
-@app.route("/ai-chat", methods=["GET", "POST"])
+    return "🤖 I am your Career Guide Bot. Ask me about AI, Cloud, Data, Software!"
+@app.route("/ai-chat", methods=["POST"])
 def ai_chat():
-    if request.method == "POST":
-        data = request.get_json()
-        reply = chatbot_reply(data.get("message", ""))
-        return jsonify({"reply": reply})
+    print("🔥 AI CHAT HIT")
 
-    return render_template("ai_chat.html")
+    data = request.get_json()
+    print("📩 DATA:", data)
+
+    user_message = data.get("message", "")
+    reply = chatbot_reply(user_message)
+
+    return jsonify({"reply": reply})
 
 
 ROADMAPS = {
