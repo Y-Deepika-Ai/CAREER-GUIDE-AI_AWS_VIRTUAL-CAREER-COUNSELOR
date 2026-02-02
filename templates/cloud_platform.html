@@ -2,22 +2,25 @@
 
 {% block content %}
 
-<section class="features container">
+<section class="cloud-feature-section">
+  <div class="cloud-feature-card">
 
-  <div class="card">
-    <div class="icon">☁️</div>
-    <h3>Cloud-Based Platform</h3>
+    <div class="cloud-header">
+      <div class="cloud-icon">
+        ☁️
+      </div>
+      <h3>Cloud-Based Platform</h3>
+    </div>
 
-    <ul class="card-list">
-      <li><strong>Backend:</strong> Flask (Python)</li>
-      <li><strong>Frontend:</strong> HTML, CSS</li>
-      <li><strong>Deployment:</strong> AWS EC2</li>
-      <li><strong>Scalability:</strong> Load Balancer Ready</li>
-      <li><strong>Security:</strong> Session-based authentication</li>
-    </ul>
+    <div class="cloud-content">
+      <p><strong>Backend:</strong> Flask (Python)</p>
+      <p><strong>Frontend:</strong> HTML, CSS</p>
+      <p><strong>Deployment:</strong> AWS EC2</p>
+      <p><strong>Scalability:</strong> Load Balancer Ready</p>
+    </div>
 
   </div>
-
 </section>
+
 
 {% endblock %}
