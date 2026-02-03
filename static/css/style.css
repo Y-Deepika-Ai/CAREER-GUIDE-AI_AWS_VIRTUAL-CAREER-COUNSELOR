@@ -1579,3 +1579,53 @@ body {
 .result-card * {
     color: #000000 !important;
 }
+video { display: none; }
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;           /* 🔥 REQUIRED */
+    z-index: 1;
+}
+.video-box {
+    background: #1c1e33;
+    width: 100%;
+    height: 380px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;         /* ✅ keep rounded corners */
+}
+
+<div class="video-box">
+    <video id="webcam" autoplay playsinline muted></video>
+    <span id="cam-status"
+          style="position:absolute; z-index:2; color:#7a7e9a;">
+        Camera Inactive
+    </span>
+</div>
+
+<script>
+async function startCamera() {
+    const video = document.getElementById("webcam");
+    const status = document.getElementById("cam-status");
+
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+        });
+
+        video.srcObject = stream;
+
+        video.style.display = "block";   // 🔥 FORCE SHOW
+        video.style.zIndex = "1";
+
+        status.style.display = "none";   // hide text
+    } catch (err) {
+        status.innerText = "Camera access denied";
+        console.error(err);
+    }
+}
+</script>
+document.getElementById("webcam").srcObject

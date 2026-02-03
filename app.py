@@ -159,9 +159,46 @@ def show_projects():
 # 5. AI INTERVIEWS (WORKING)
 # ===============================
 # Sample interview questions
-@app.route("/ai_interviews")
+from flask import jsonify, request
+import random
+
+INTERVIEW_QUESTIONS = {
+    "Software Developer": [
+        "What is OOP?",
+        "Explain REST APIs.",
+        "What is Flask?",
+        "Difference between list and tuple?",
+        "Explain load balancing."
+    ]
+}
+
+@app.route("/api/interview/question", methods=["POST"])
+def get_interview_question():
+    role = "Software Developer"
+    question = random.choice(INTERVIEW_QUESTIONS[role])
+    return jsonify({"question": question})
+
+
+@app.route("/api/interview/evaluate", methods=["POST"])
+def evaluate_answer():
+    data = request.get_json()
+    answer = data.get("answer", "")
+
+    if len(answer.strip()) < 20:
+        return jsonify({
+            "feedback": "Answer is too short. Try explaining with examples.",
+            "score": 4
+        })
+
+    return jsonify({
+        "feedback": "Good answer. Clear explanation.",
+        "score": 8
+    })
+@app.route("/ai-interviews")
 def ai_interviews():
     return render_template("ai_interviews.html")
+
+
 # ===============================
 # 6. RESUME ANALYSIS (WORKING)
 # ===============================
