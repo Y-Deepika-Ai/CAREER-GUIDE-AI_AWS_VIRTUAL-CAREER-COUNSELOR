@@ -186,27 +186,17 @@ def resume_analysis():
 # ===============================
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    if 'username' in session:
+        return redirect(url_for("home"))
+
     if request.method == "POST":
-        try:
-            username = request.form["username"]
-            password = request.form["password"]
-
-            res = users_table.get_item(Key={"username": username})
-            if "Item" in res:
-                return "User already exists"
-
-            users_table.put_item(Item={
-                "username": username,
-                "password": password
-            })
-
-            session["username"] = username
-            return redirect(url_for("dashboard"))
-
-        except Exception as e:
-            print("SIGNUP ERROR:", e)
-            return "Server error during signup. Check DynamoDB."
-
+        users[request.form["username"]] = request.form["password"]
+        session["username"] = request.form["username"]
+        users_table.put_item(Item={
+            "username": request.form["username"],
+            "password": request.form["password"]
+        })
+        return redirect(url_for("dashboard"))
     return render_template("signup.html")
 
 @app.route("/login", methods=["GET", "POST"])
