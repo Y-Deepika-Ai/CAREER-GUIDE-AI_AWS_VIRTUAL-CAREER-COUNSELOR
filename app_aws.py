@@ -21,6 +21,7 @@ app.secret_key = "career_guide_ai_secure_key_2026"
 AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
 SNS_TOPIC_ARN = os.environ.get("SNS_TOPIC_ARN")
 
+
 dynamodb = boto3.resource("dynamodb", region_name=AWS_REGION)
 sns = boto3.client("sns", region_name=AWS_REGION)
 
