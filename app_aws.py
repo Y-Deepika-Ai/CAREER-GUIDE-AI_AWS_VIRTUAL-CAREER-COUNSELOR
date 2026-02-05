@@ -186,35 +186,59 @@ def resume_analysis():
 # ===============================
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if 'username' in session:
+    if "username" in session:
         return redirect(url_for("home"))
 
     if request.method == "POST":
-        users[request.form["username"]] = request.form["password"]
-        session["username"] = request.form["username"]
-        users_table.put_item(Item={
-            "username": request.form["username"],
-            "password": request.form["password"]
-        })
-        return redirect(url_for("dashboard"))
+        username = request.form["username"]
+        password = request.form["password"]
+
+        try:
+            # Check if user already exists
+            response = users_table.get_item(
+                Key={"username": username}
+            )
+
+            if "Item" in response:
+                return "User already exists"
+
+            # Create new user
+            users_table.put_item(
+                Item={
+                    "username": username,
+                    "password": password
+                }
+            )
+
+            session["username"] = username
+            return redirect(url_for("dashboard"))
+
+        except ClientError as e:
+            print("SIGNUP ERROR:", e)
+            return "Server error during signup. Check DynamoDB."
+
     return render_template("signup.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
         try:
-            username = request.form["username"]
-            password = request.form["password"]
+            response = users_table.get_item(
+                Key={"username": username}
+            )
 
-            res = users_table.get_item(Key={"username": username})
-
-            if "Item" in res and res["Item"]["password"] == password:
-                session["username"] = username
-                return redirect(url_for("dashboard"))
+            if "Item" in response:
+                if response["Item"]["password"] == password:
+                    session["username"] = username
+                    return redirect(url_for("dashboard"))
 
             return "Invalid username or password"
 
-        except Exception as e:
+        except ClientError as e:
             print("LOGIN ERROR:", e)
             return "Server error during login. Check DynamoDB."
 

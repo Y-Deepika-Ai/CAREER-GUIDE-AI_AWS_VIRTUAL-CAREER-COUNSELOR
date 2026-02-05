@@ -4,6 +4,42 @@ from dotenv import load_dotenv
 from functools import wraps
 from werkzeug.utils import secure_filename
 from PyPDF2 import PdfReader
+import sqlite3
+from flask import g
+
+DATABASE = "career_guide_ai.db"
+
+app = Flask(__name__)
+
+
+def get_db():
+    if "db" not in g:
+        g.db = sqlite3.connect(DATABASE)
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+@app.teardown_appcontext
+def close_db(error):
+    db = g.pop("db", None)
+    if db is not None:
+        db.close()
+def init_db():
+    db = get_db()
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            username TEXT PRIMARY KEY,
+            password TEXT NOT NULL
+        )
+    """)
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS admin_users (
+            admin_id TEXT PRIMARY KEY,
+            password TEXT NOT NULL
+        )
+    """)
+    db.commit()
+with app.app_context():
+    init_db()
 
 
 # ===============================
@@ -265,31 +301,50 @@ def test():
 # ===============================
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if 'username' in session:
-        return redirect(url_for("home"))
-
-    if request.method == "POST":
-        users[request.form["username"]] = request.form["password"]
-        session["username"] = request.form["username"]
-        return redirect(url_for("dashboard"))
-
-    return render_template("signup.html")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if 'username' in session:
+    if "username" in session:
         return redirect(url_for("home"))
 
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
 
-        if username in users and users[username] == password:
+        db = get_db()
+
+        try:
+            db.execute(
+                "INSERT INTO users (username, password) VALUES (?, ?)",
+                (username, password)
+            )
+            db.commit()
             session["username"] = username
             return redirect(url_for("dashboard"))
 
+        except sqlite3.IntegrityError:
+            return "Username already exists"
+
+    return render_template("signup.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        db = get_db()
+        user = db.execute(
+            "SELECT * FROM users WHERE username = ? AND password = ?",
+            (username, password)
+        ).fetchone()
+
+        if user:
+            session["username"] = username
+            return redirect(url_for("dashboard"))
+
+        return "Invalid username or password"
+
     return render_template("login.html")
+
 
 
 @app.route("/logout")
